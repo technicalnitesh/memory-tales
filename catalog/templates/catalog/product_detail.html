@@ -1,0 +1,162 @@
+{% extends 'catalog/base.html' %}
+{% load static %}
+
+{% block title %}{{ product.name }}{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'catalog/css/product-detail.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <!-- Breadcrumb -->
+    <nav class="mb-4">
+        <a href="/">Home</a>
+        <span class="mx-2">/</span>
+        <a href="#">{{ product.category.name }}</a>
+        <span class="mx-2">/</span>
+        <strong>{{ product.name }}</strong>
+    </nav>
+
+    <div class="row g-5">
+
+        <!-- LEFT SIDE -->
+        <div class="col-lg-6">
+
+            <div class="main-image">
+
+                {% if product.images.first %}
+                    <img id="mainProductImage"
+                         src="{{ product.images.first.image.url }}"
+                         alt="{{ product.name }}">
+                {% else %}
+                    <img id="mainProductImage"
+                         src="{{ product.thumbnail.url }}"
+                         alt="{{ product.name }}">
+                {% endif %}
+
+            </div>
+
+            <div class="thumb-wrapper mt-4">
+
+                {% for image in product.images.all %}
+
+                <div class="thumb">
+
+                    <img
+                        src="{{ image.image.url }}"
+                        onclick="changeImage(this)"
+                    >
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+        <!-- RIGHT SIDE -->
+
+        <div class="col-lg-6">
+
+            <div class="product-card">
+
+                <span class="badge bg-success mb-3">
+                    Best Seller
+                </span>
+
+                <h1 class="product-title">
+                    {{ product.name }}
+                </h1>
+
+                <div class="rating">
+
+                    ⭐⭐⭐⭐⭐
+
+                    <span>(126 Reviews)</span>
+
+                </div>
+
+                <div class="price">
+
+                    ₹{{ product.base_price }}
+
+                </div>
+
+                <p class="short-description">
+
+                    {{ product.short_description }}
+
+                </p>
+
+                <ul class="highlights">
+
+                    <li>✔ Premium HD Printing</li>
+
+                    <li>✔ Waterproof Finish</li>
+
+                    <li>✔ Fast Delivery</li>
+
+                    <li>✔ Secure Packaging</li>
+
+                </ul>
+
+                <hr>
+
+                <!-- Placeholder -->
+
+                <div class="options-placeholder">
+
+                    <h5>Customization Options</h5>
+
+                    <p>
+                        Product Options will appear here.
+                    </p>
+
+                </div>
+
+                <div class="qty-area">
+
+                    <button>-</button>
+
+                    <input
+                        type="text"
+                        value="1"
+                    >
+
+                    <button>+</button>
+
+                </div>
+
+                <div class="buy-buttons">
+
+                    <button class="btn-cart">
+
+                        🛒 Add To Cart
+
+                    </button>
+
+                    <button class="btn-buy">
+
+                        Buy Now
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'catalog/js/product-detail.js' %}"></script>
+{% endblock %}

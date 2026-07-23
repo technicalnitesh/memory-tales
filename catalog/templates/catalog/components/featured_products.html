@@ -1,0 +1,80 @@
+<section class="featured-section">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <span>FEATURED PRODUCTS</span>
+
+            <h2>Best Selling Products</h2>
+
+            <p>Create beautiful memories with premium quality printing.</p>
+
+        </div>
+
+        <div class="row">
+
+            {% for product in featured_products %}
+
+            <div class="col-lg-3 col-md-6 mb-4">
+
+                <div class="product-card">
+
+                    <div class="product-image">
+
+                        {% with primary=product.images.all|first %}
+
+                            {% if primary %}
+                                <img src="{{ primary.image.url }}" alt="{{ product.name }}">
+                            {% else %}
+                                <img src="https://via.placeholder.com/500x500?text=No+Image" alt="">
+                            {% endif %}
+
+                        {% endwith %}
+
+                        <span class="product-badge">Best Seller</span>
+
+                        <div class="wishlist-btn">
+                            ♥
+                        </div>
+
+                    </div>
+
+                    <div class="product-content">
+
+                        <small>{{ product.category.name }}</small>
+
+                        <h5>{{ product.name }}</h5>
+
+                        <div class="rating">
+
+                            ★★★★★
+
+                        </div>
+
+                        <div class="price">
+
+                            ₹ {{ product.base_price }}
+
+                        </div>
+
+                        <a href="#" class="customize-btn">
+                            
+
+                            Customize Now
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</section>
