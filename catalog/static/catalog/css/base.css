@@ -1,0 +1,40 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+
+    font-family:'Inter',sans-serif;
+
+    background:var(--light);
+
+    color:var(--dark);
+
+}
+
+h1,h2,h3,h4,h5,h6{
+
+    font-family:'Poppins',sans-serif;
+}
+
+a{
+
+    text-decoration:none;
+}
+
+img{
+
+    max-width:100%;
+}
+
+.section{
+
+    padding:90px 0;
+}
+
+.container{
+
+    max-width:1320px;
+}

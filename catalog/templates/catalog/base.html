@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% block title %}Memory Tales{% endblock %}</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static 'catalog/css/variables.css' %}">
+    <link rel="stylesheet" href="{% static 'catalog/css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'catalog/css/navbar.css' %}">
+    <link rel="stylesheet" href="{% static 'catalog/css/buttons.css' %}">
+    <link rel="stylesheet" href="{% static 'catalog/css/cards.css' %}">
+    <link rel="stylesheet" href="{% static 'catalog/css/home.css' %}">
+    <link rel="stylesheet" href="{% static 'catalog/css/responsive.css' %}">
+
+</head>
+
+<body>
+
+    {% include 'catalog/includes/navbar.html' %}
+
+    {% block content %}
+    {% endblock %}
+
+    {% include 'catalog/includes/footer.html' %}
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <script src="{% static 'catalog/js/main.js' %}"></script>
+    <script src="{% static 'catalog/js/cart.js' %}"></script>
+    <script src="{% static 'catalog/js/product.js' %}"></script>
+    <script src="{% static 'catalog/js/search.js' %}"></script>
+
+</body>
+
+</html>
