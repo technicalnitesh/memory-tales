@@ -1,0 +1,46 @@
+{% extends 'catalog/base.html' %}
+{% load static %}
+
+{% block title %}
+All Products
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'catalog/css/product-list.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="page-header">
+
+        <div>
+
+            <h2>All Products</h2>
+
+            <p>{{ products.count }} Products Found</p>
+
+        </div>
+
+        <div>
+
+            <select class="form-select">
+
+                <option>Newest</option>
+
+                <option>Price Low to High</option>
+
+                <option>Price High to Low</option>
+
+            </select>
+
+        </div>
+
+    </div>
+
+    {% include 'catalog/components/product-grid.html' %}
+
+</div>
+
+{% endblock %}

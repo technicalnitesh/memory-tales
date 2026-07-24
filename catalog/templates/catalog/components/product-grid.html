@@ -1,0 +1,21 @@
+<div class="row g-4">
+
+    {% for product in products %}
+
+        <div class="col-lg-3 col-md-4 col-sm-6">
+
+            {% include 'catalog/components/product-card.html' %}
+
+        </div>
+
+    {% empty %}
+
+        <div class="col-12 text-center py-5">
+
+            <h4>No Products Found</h4>
+
+        </div>
+
+    {% endfor %}
+
+</div>

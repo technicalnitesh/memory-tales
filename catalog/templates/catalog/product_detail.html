@@ -38,6 +38,7 @@
                 {% endif %}
 
             </div>
+            
 
             <div class="thumb-wrapper mt-4">
 
@@ -80,11 +81,8 @@
 
                 </div>
 
-                <div class="price">
-
-                    ₹{{ product.base_price }}
-
-                </div>
+                
+                
 
                 <p class="short-description">
 
@@ -117,20 +115,206 @@
                     </p>
 
                 </div>
+                     <div class="product-options">
 
-                <div class="qty-area">
+    <h4 class="mb-4">
+        Customize Your Product
+    </h4>
 
-                    <button>-</button>
+    {% for option in product.options.all %}
 
-                    <input
-                        type="text"
-                        value="1"
-                    >
+        <div class="option-group mb-4">
 
-                    <button>+</button>
+            <label class="form-label fw-bold">
 
-                </div>
+                {{ option.option.name }}
 
+            </label>
+
+            <select
+                class="form-select product-option"
+            >
+
+                <option value="">
+
+                    Select {{ option.option.name }}
+
+                </option>
+
+                {% for value in option.values.all %}
+
+                <option
+                    value="{{ value.id }}"
+                    data-price="{{ value.price }}"
+                >
+
+                    {{ value.value }}
+
+                    {% if value.price > 0 %}
+
+                    (+₹{{ value.price }})
+
+                    {% endif %}
+
+                </option>
+
+                {% endfor %}
+
+            </select>
+
+        </div>
+
+    {% endfor %}
+
+</div>
+
+                <div class="qty-box">
+
+    <button id="minusBtn">−</button>
+
+    <input
+        id="qty"
+        value="1"
+        readonly
+    >
+
+    <button id="plusBtn">+</button>
+
+</div>
+<div class="upload-section">
+
+    <h4 class="mb-3">
+        Upload Your Photo
+    </h4>
+
+    <div class="upload-box" id="uploadBox">
+
+        <input
+            type="file"
+            id="photoInput"
+            accept="image/*"
+            hidden
+        >
+
+        <div class="upload-content">
+
+            <div class="upload-icon">
+
+                📷
+
+            </div>
+
+            <h5>
+
+                Drag & Drop Your Photo
+
+            </h5>
+
+            <p>
+
+                or Click to Browse
+
+            </p>
+
+            <small>
+
+                JPG, PNG, WEBP (Max 10MB)
+
+            </small>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div
+    class="preview-section mt-4"
+    id="previewSection"
+    style="display:none;"
+>
+
+    <h5>
+
+        Preview
+
+    </h5>
+
+    <img
+        id="previewImage"
+        class="preview-image"
+    >
+
+</div>
+<div class="price-card">
+
+    <div class="price-row">
+
+        <span>Base Price</span>
+
+        <strong>
+
+            ₹<span id="basePrice">
+
+                {{ product.base_price }}
+
+            </span>
+
+        </strong>
+
+    </div>
+
+    <div class="price-row">
+
+        <span>Customization</span>
+
+        <strong>
+
+            ₹<span id="optionPrice">
+
+                0.00
+
+            </span>
+
+        </strong>
+
+    </div>
+
+    <div class="price-row">
+
+        <span>Quantity</span>
+
+        <strong>
+
+            <span id="qtyText">
+
+                1
+
+            </span>
+
+        </strong>
+
+    </div>
+
+    <hr>
+
+    <div class="price-row total">
+
+        <span>Total Price</span>
+
+        <strong>
+
+            ₹<span id="productPrice">
+
+                {{ product.base_price }}
+
+            </span>
+
+        </strong>
+
+    </div>
+
+</div>
                 <div class="buy-buttons">
 
                     <button class="btn-cart">
@@ -146,8 +330,10 @@
                     </button>
 
                 </div>
+                
 
             </div>
+     
 
         </div>
 

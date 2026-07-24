@@ -1,0 +1,59 @@
+<div class="product-card">
+
+    <div class="product-image">
+
+        <img
+            src="{{ product.thumbnail.url }}"
+            alt="{{ product.name }}"
+        >
+
+        {% if product.is_featured %}
+
+            <span class="badge-featured">
+
+                BEST SELLER
+
+            </span>
+
+        {% endif %}
+
+    </div>
+
+    <div class="product-body">
+
+        <small>
+
+            {{ product.category.name }}
+
+        </small>
+
+        <h5>
+
+            {{ product.name }}
+
+        </h5>
+
+        <p>
+
+            {{ product.short_description|truncatechars:60 }}
+
+        </p>
+
+        <div class="product-price">
+
+            ₹{{ product.base_price }}
+
+        </div>
+
+        <a
+            href="{% url 'product_detail' product.slug %}"
+            class="btn btn-primary w-100 mt-3"
+        >
+
+            View Details
+
+        </a>
+
+    </div>
+
+</div>

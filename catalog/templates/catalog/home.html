@@ -6,7 +6,117 @@ Memory Tales
 
 {% block content %}
 {% include 'catalog/components/hero.html' %}
+<section class="py-5">
+
+    <div class="container">
+
+        <div class="section-title text-center mb-5">
+
+            <h2>New Arrivals</h2>
+
+            <p>Latest Personalized Products</p>
+
+        </div>
+
+        {% include "catalog/components/product-grid.html" with products=latest_products %}
+
+    </div>
+
+</section>
+
+<section class="py-5 bg-light">
+
+    <div class="container">
+
+        <div class="section-title text-center mb-5">
+
+            <h2>Best Sellers</h2>
+
+            <p>Most Loved Products</p>
+
+        </div>
+
+        {% include "catalog/components/product-grid.html" with products=featured_products %}
+
+    </div>
+
+</section>
 
 {% include 'catalog/components/featured_products.html' %}
+<section class="why-choose py-5">
+
+    <div class="container">
+
+        <div class="text-center mb-5">
+
+            <h2>Why Choose Memory Tales?</h2>
+
+            <p>Create unforgettable gifts with premium quality and fast delivery.</p>
+
+        </div>
+
+        <div class="row g-4">
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">🖼️</div>
+
+                    <h5>Premium Quality</h5>
+
+                    <p>High-resolution printing with durable materials.</p>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">🚚</div>
+
+                    <h5>Fast Delivery</h5>
+
+                    <p>Quick processing and secure shipping across India.</p>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">🎁</div>
+
+                    <h5>Personalized Gifts</h5>
+
+                    <p>Customize every product with your own memories.</p>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">💯</div>
+
+                    <h5>100% Satisfaction</h5>
+
+                    <p>Quality products backed by reliable customer support.</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
 
 {% endblock %}

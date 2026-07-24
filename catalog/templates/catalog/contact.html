@@ -1,0 +1,269 @@
+{% extends 'catalog/base.html' %}
+{% load static %}
+
+{% block title %}Contact Us | Memory Tales{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'catalog/css/contact.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<!-- Hero -->
+
+<section class="contact-hero">
+
+    <div class="container text-center">
+
+        <span class="contact-tag">
+
+            Contact Us
+
+        </span>
+
+        <h1>
+
+            We'd Love To Hear From You
+
+        </h1>
+
+        <p>
+
+            Whether you have a question about products, orders,
+            customization or anything else, our team is ready to help.
+
+        </p>
+
+    </div>
+
+</section>
+
+<!-- Contact Info -->
+
+<section class="contact-info">
+
+    <div class="container">
+
+        <div class="row g-4">
+
+            <div class="col-lg-4">
+
+                <div class="info-card">
+
+                    <div class="icon">
+
+                        📍
+
+                    </div>
+
+                    <h4>
+
+                        Office Address
+
+                    </h4>
+
+                    <p>
+
+                        Bhopal,
+                        Madhya Pradesh,
+                        India
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-4">
+
+                <div class="info-card">
+
+                    <div class="icon">
+
+                        📞
+
+                    </div>
+
+                    <h4>
+
+                        Phone
+
+                    </h4>
+
+                    <p>
+
+                        +91 9876543210
+
+                    </p>
+
+                    <p>
+
+                        Mon - Sat
+                        10:00 AM - 7:00 PM
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-4">
+
+                <div class="info-card">
+
+                    <div class="icon">
+
+                        ✉️
+
+                    </div>
+
+                    <h4>
+
+                        Email
+
+                    </h4>
+
+                    <p>
+
+                        support@memorytales.in
+
+                    </p>
+
+                    <p>
+
+                        sales@memorytales.in
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- Contact Form -->
+
+<section class="contact-section">
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-lg-7">
+
+                <div class="contact-form">
+
+                    <h2>
+
+                        Send Us A Message
+
+                    </h2>
+
+                    <form>
+
+                        <div class="row">
+
+                            <div class="col-md-6 mb-3">
+
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    placeholder="Your Name">
+
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+
+                                <input
+                                    type="email"
+                                    class="form-control"
+                                    placeholder="Email Address">
+
+                            </div>
+
+                        </div>
+
+                        <div class="mb-3">
+
+                            <input
+                                type="text"
+                                class="form-control"
+                                placeholder="Subject">
+
+                        </div>
+
+                        <div class="mb-3">
+
+                            <textarea
+                                rows="6"
+                                class="form-control"
+                                placeholder="Write your message..."></textarea>
+
+                        </div>
+
+                        <button class="btn-contact">
+
+                            Send Message
+
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-5">
+
+                <div class="contact-side">
+
+                    <h3>
+
+                        Why Contact Memory Tales?
+
+                    </h3>
+
+                    <ul>
+
+                        <li>✔ Order Support</li>
+
+                        <li>✔ Bulk Orders</li>
+
+                        <li>✔ Product Customization</li>
+
+                        <li>✔ Corporate Gifts</li>
+
+                        <li>✔ Delivery Assistance</li>
+
+                    </ul>
+
+                    <img
+                        src="{% static 'catalog/images/contact/contact.png' %}"
+                        class="img-fluid">
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- Google Map -->
+
+<section class="map-section">
+
+    <iframe
+        src="https://www.google.com/maps?q=Bhopal&output=embed"
+        loading="lazy">
+    </iframe>
+
+</section>
+
+{% endblock %}

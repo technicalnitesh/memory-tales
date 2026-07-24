@@ -213,3 +213,148 @@
     border-radius:12px;
 
 }
+.option-group{
+
+    margin-bottom:25px;
+
+}
+
+.option-group label{
+
+    font-weight:600;
+
+    margin-bottom:8px;
+
+}
+
+.qty-box{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    margin-top:25px;
+
+}
+
+.qty-box button{
+
+    width:45px;
+
+    height:45px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:#f4f4f4;
+
+    font-size:22px;
+
+    cursor:pointer;
+
+}
+
+.qty-box input{
+
+    width:70px;
+
+    text-align:center;
+
+    height:45px;
+
+    border-radius:10px;
+
+    border:1px solid #ddd;
+
+}
+.price-card{
+
+    background:#ffffff;
+
+    border-radius:18px;
+
+    padding:25px;
+
+    margin:25px 0;
+
+    box-shadow:0 10px 35px rgba(0,0,0,.08);
+
+    border:1px solid #ececec;
+
+}
+
+.price-row{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:16px;
+
+    font-size:17px;
+
+}
+
+.price-row.total{
+
+    margin-top:15px;
+
+    font-size:24px;
+
+    font-weight:700;
+
+    color:#0d6efd;
+
+}
+.upload-box{
+
+    border:2px dashed #0d6efd;
+
+    border-radius:18px;
+
+    padding:40px;
+
+    text-align:center;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+    background:#fafcff;
+
+}
+
+.upload-box:hover{
+
+    background:#eef5ff;
+
+    transform:translateY(-3px);
+
+}
+
+.upload-icon{
+
+    font-size:60px;
+
+    margin-bottom:20px;
+
+}
+
+.preview-image{
+
+    width:100%;
+
+    max-height:450px;
+
+    object-fit:contain;
+
+    border-radius:15px;
+
+    border:1px solid #ddd;
+
+}

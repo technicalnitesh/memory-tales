@@ -26,7 +26,10 @@
     <link rel="stylesheet" href="{% static 'catalog/css/buttons.css' %}">
     <link rel="stylesheet" href="{% static 'catalog/css/cards.css' %}">
     <link rel="stylesheet" href="{% static 'catalog/css/home.css' %}">
+    <link rel="stylesheet" href="{% static 'catalog/css/hero.css' %}">
     <link rel="stylesheet" href="{% static 'catalog/css/responsive.css' %}">
+    <link rel="stylesheet" href="{% static 'catalog/css/footer.css' %}">
+{% block extra_css %}{% endblock %}
 
 </head>
 
@@ -35,6 +38,7 @@
     {% include 'catalog/includes/navbar.html' %}
 
     {% block content %}
+    
     {% endblock %}
 
     {% include 'catalog/includes/footer.html' %}
@@ -47,6 +51,8 @@
     <script src="{% static 'catalog/js/cart.js' %}"></script>
     <script src="{% static 'catalog/js/product.js' %}"></script>
     <script src="{% static 'catalog/js/search.js' %}"></script>
+
+{% block extra_js %}{% endblock %}
 
 </body>
 
