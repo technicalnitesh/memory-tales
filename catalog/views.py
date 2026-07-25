@@ -1,7 +1,10 @@
 from django.shortcuts import render
 from .models import Category, Product
 from django.shortcuts import render, get_object_or_404
-
+from django.template.loader import render_to_string
+from django.http import JsonResponse
+from django.core.paginator import Paginator
+from django.db.models import Count
 def home(request):
 
     categories = Category.objects.filter(status=True)
@@ -47,30 +50,128 @@ def product_list(request):
     search = request.GET.get(
     "search"
     )
+    category = request.GET.get("category")
+
+    if category:
+
+        products = products.filter(
+
+            category__slug=category
+
+        )
 
     if search:
         products = products.filter(
             name__icontains=search
         )
+    sort = request.GET.get("sort")
+
+    if sort == "price_low":
+
+        products = products.order_by("base_price")
+
+    elif sort == "price_high":
+
+        products = products.order_by("-base_price")
+
+    elif sort == "name_asc":
+
+        products = products.order_by("name")
+
+    elif sort == "name_desc":
+
+        products = products.order_by("-name")
+
+    else:
+
+        products = products.order_by("-id")
 
     categories = Category.objects.filter(
-        status=True
+    status=True
+    ).annotate(
+        product_count=Count("products")
+    ).filter(
+        product_count__gt=0
     )
+    category_slug = request.GET.get("category")
+
+    page_title = "All Products"
+
+    if category_slug:
+
+        category = Category.objects.filter(
+            slug=category_slug,
+            status=True
+        ).first()
+
+    if category:
+
+        page_title = category.name
+
+
+# -------------------------
+# Price Filter
+# -------------------------
+
+    min_price = request.GET.get("min_price")
+
+    max_price = request.GET.get("max_price")
+
+    if min_price:
+
+        products = products.filter(
+            base_price__gte=min_price
+        )
+
+    if max_price:
+
+        products = products.filter(
+            base_price__lte=max_price
+        )
+    # Pagination
+
+    paginator = Paginator(products, 12)
+
+    page = request.GET.get("page")
+
+    products = paginator.get_page(page)
 
     context = {
 
-        "page_title": "All Products",
+        "page_title": page_title,
 
         "products": products,
 
         "categories": categories,
+        "selected_category": category_slug,
 
     }
 
+    if request.headers.get("x-requested-with") == "XMLHttpRequest":
+
+        html = render_to_string(
+
+            "catalog/components/product-content.html",
+
+            context,
+
+            request=request
+        )
+
+        return JsonResponse({
+
+            "html": html
+
+        })
+
     return render(
+
         request,
+
         "catalog/product_list.html",
+
         context
+
     )
 
 def product_detail(request, slug):
@@ -141,6 +242,27 @@ def category_products(request, slug):
             name__icontains=search
 
         )
+    sort = request.GET.get("sort")
+
+    if sort == "price_low":
+
+        products = products.order_by("base_price")
+
+    elif sort == "price_high":
+
+        products = products.order_by("-base_price")
+
+    elif sort == "name_asc":
+
+        products = products.order_by("name")
+
+    elif sort == "name_desc":
+
+        products = products.order_by("-name")
+
+    else:
+
+        products = products.order_by("-id")
 
     context = {
 
@@ -151,6 +273,23 @@ def category_products(request, slug):
         "categories": categories,
 
     }
+
+    if request.headers.get("x-requested-with") == "XMLHttpRequest":
+
+        html = render_to_string(
+
+            "catalog/components/product-content.html",
+
+            context,
+
+            request=request
+        )
+
+    return JsonResponse({
+
+        "html": html
+
+    })
 
     return render(
 

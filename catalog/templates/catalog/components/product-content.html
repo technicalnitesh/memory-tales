@@ -1,0 +1,129 @@
+
+<div id="productContent">
+
+    <div class="top-bar">
+
+        <div>
+
+            <h3>{{ page_title }}</h3>
+
+           <small>
+
+    {{ products.paginator.count }} Products Found
+
+</small>
+
+        </div>
+
+        <div>
+
+            <form id="sortForm">
+
+                <select
+                    name="sort"
+                    class="form-select"
+                >
+
+                    <option value="">Newest</option>
+
+                    <option value="price_low"
+                        {% if request.GET.sort == "price_low" %}selected{% endif %}
+                    >
+                        Price Low to High
+                    </option>
+
+                    <option value="price_high"
+                        {% if request.GET.sort == "price_high" %}selected{% endif %}
+                    >
+                        Price High to Low
+                    </option>
+
+                    <option value="name_asc"
+                        {% if request.GET.sort == "name_asc" %}selected{% endif %}
+                    >
+                        Name A-Z
+                    </option>
+
+                    <option value="name_desc"
+                        {% if request.GET.sort == "name_desc" %}selected{% endif %}
+                    >
+                        Name Z-A
+                    </option>
+
+                </select>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <hr>
+
+    {% include "catalog/components/product-grid.html" with products=products %}
+
+    {% if products.has_other_pages %}
+
+<div class="pagination-wrapper mt-5">
+
+    <nav>
+
+        <ul class="pagination justify-content-center">
+
+            {% if products.has_previous %}
+
+            <li class="page-item">
+
+                <a
+                    href="#"
+                    class="page-link pagination-link"
+                    data-page="{{ products.previous_page_number }}"
+                >
+                    Previous
+                </a>
+
+            </li>
+
+            {% endif %}
+
+            {% for num in products.paginator.page_range %}
+
+            <li class="page-item {% if products.number == num %}active{% endif %}">
+
+                <a
+                    href="#"
+                    class="page-link pagination-link"
+                    data-page="{{ num }}"
+                >
+                    {{ num }}
+                </a>
+
+            </li>
+
+            {% endfor %}
+
+            {% if products.has_next %}
+
+            <li class="page-item">
+
+                <a
+                    href="#"
+                    class="page-link pagination-link"
+                    data-page="{{ products.next_page_number }}"
+                >
+                    Next
+                </a>
+
+            </li>
+
+            {% endif %}
+
+        </ul>
+
+    </nav>
+
+</div>
+
+{% endif %}
+
+</div>

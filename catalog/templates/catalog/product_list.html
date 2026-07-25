@@ -71,19 +71,32 @@
 
                     <div class="form-check">
 
-                        <input
+                        <!-- <input
                             class="form-check-input"
                             type="checkbox"
-                        >
+                        > -->
 
                         <label class="form-check-label">
 
-                           <a
-    href="{% url 'category_products' category.slug %}"
-    class="category-link"
+                
+
+<a
+    href="#"
+    class="category-filter {% if selected_category == category.slug %}active-category{% endif %}"
+    data-category="{{ category.slug }}"
 >
 
-    {{ category.name }}
+    <span>
+
+        {{ category.name }}
+
+    </span>
+
+    <span class="badge bg-primary">
+
+        {{ category.product_count }}
+
+    </span>
 
 </a>
 
@@ -95,16 +108,57 @@
 
                     <hr>
 
-                    <h6>
+                    <h6>Price</h6>
 
-                        Price
+<div class="row">
 
-                    </h6>
+    <div class="col-6">
 
-                    <input
-                        type="range"
-                        class="form-range"
-                    >
+    
+
+        <input
+    type="number"
+    id="minPrice"
+    class="form-control"
+    min="0"
+    step="1"
+    placeholder="Min"
+>
+
+    </div>
+
+    <div class="col-6">
+
+       <input
+    type="number"
+    id="maxPrice"
+    class="form-control"
+    min="0"
+    step="1"
+    placeholder="Max"
+>
+
+    </div>
+
+</div>
+
+<div class="d-grid gap-2 mt-3">
+
+    <button
+        class="btn btn-primary"
+        id="priceFilterBtn"
+    >
+        Apply Filter
+    </button>
+
+    <button
+        class="btn btn-outline-secondary"
+        id="clearFilterBtn"
+    >
+        Clear Filter
+    </button>
+
+</div>
 
                     <hr>
 
@@ -136,77 +190,21 @@
 
             <!-- RIGHT -->
 
-            <div class="col-lg-9">
+          <div class="col-lg-9">
 
-                <div class="top-bar">
+    {% include "catalog/components/product-content.html" %}
 
-                    <div>
-
-                        <h3>
-
-{{ page_title }}
-                        </h3>
-
-                        <small>
-
-                            {{ products.count }} Products Found
-
-                        </small>
-
-                    </div>
-
-                    <div>
-
-                        <select class="form-select">
-
-                            <option>
-
-                                Newest
-
-                            </option>
-
-                            <option>
-
-                                Price Low to High
-
-                            </option>
-
-                            <option>
-
-                                Price High to Low
-
-                            </option>
-
-                            <option>
-
-                                Name A-Z
-
-                            </option>
-
-                        </select>
-
-                    </div>
-
-                </div>
-
-                <hr>
-
-                {% include 'catalog/components/product-grid.html' with products=products %}
-
-                <!-- Pagination -->
-
-                <div class="pagination-wrapper">
-
-                    Pagination Here
-
-                </div>
-
-            </div>
+</div>
 
         </div>
 
     </div>
 
 </section>
+
+{% endblock %}
+{% block extra_js %}
+
+<script src="{% static 'catalog/js/product-list.js' %}"></script>
 
 {% endblock %}

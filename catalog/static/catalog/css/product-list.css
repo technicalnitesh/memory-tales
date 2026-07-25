@@ -175,3 +175,51 @@
     padding-left:10px;
 
 }
+
+.category-filter{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    text-decoration:none;
+
+    color:#333;
+
+    padding:12px 15px;
+
+    border-radius:10px;
+
+    margin-bottom:8px;
+
+    transition:.3s;
+
+    font-weight:500;
+
+}
+
+.category-filter:hover{
+
+    background:#eef4ff;
+
+    color:#0d6efd;
+
+}
+
+.active-category{
+
+    background:#0d6efd;
+
+    color:#fff !important;
+
+}
+
+.active-category .badge{
+
+    background:#fff !important;
+
+    color:#0d6efd !important;
+
+}
