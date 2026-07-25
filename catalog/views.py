@@ -21,19 +21,6 @@ def home(request):
 
     return render(request, "catalog/home.html", context)
 
-def product_list(request):
-
-    products = Product.objects.filter(
-        status=True
-    ).order_by('-id')
-
-    return render(
-        request,
-        'catalog/product_list.html',
-        {
-            'products': products
-        }
-    )
 def about(request):
 
     return render(
@@ -47,6 +34,43 @@ def contact(request):
     return render(
         request,
         'catalog/contact.html'
+    )
+def product_list(request):
+
+    products = Product.objects.filter(
+        status=True
+    ).select_related(
+        "category"
+    ).prefetch_related(
+        "images"
+    )
+    search = request.GET.get(
+    "search"
+    )
+
+    if search:
+        products = products.filter(
+            name__icontains=search
+        )
+
+    categories = Category.objects.filter(
+        status=True
+    )
+
+    context = {
+
+        "page_title": "All Products",
+
+        "products": products,
+
+        "categories": categories,
+
+    }
+
+    return render(
+        request,
+        "catalog/product_list.html",
+        context
     )
 
 def product_detail(request, slug):
@@ -72,3 +96,68 @@ def product_detail(request, slug):
     }
 
     return render(request, "catalog/product_detail.html", context)
+
+def category_products(request, slug):
+
+    category = get_object_or_404(
+
+        Category,
+
+        slug=slug,
+
+        status=True
+
+    )
+
+    products = Product.objects.filter(
+
+        category=category,
+
+        status=True
+
+    ).select_related(
+
+        "category"
+
+    ).prefetch_related(
+
+        "images"
+
+    )
+
+    categories = Category.objects.filter(
+
+        status=True
+
+    )
+    search = request.GET.get(
+    "search"
+    )
+
+    if search:
+
+        products = products.filter(
+
+            name__icontains=search
+
+        )
+
+    context = {
+
+        "page_title": category.name,
+
+        "products": products,
+
+        "categories": categories,
+
+    }
+
+    return render(
+
+        request,
+
+        "catalog/product_list.html",
+
+        context
+
+    )

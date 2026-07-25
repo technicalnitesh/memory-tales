@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-{{ page_title }}
+All Products
 {% endblock %}
 
 {% block extra_css %}
@@ -29,7 +29,8 @@
 
             <span>
 
-<h2>{{ page_title }}</h2>
+                All Products
+
             </span>
 
         </nav>
@@ -78,14 +79,7 @@
 
                         <label class="form-check-label">
 
-                           <a
-    href="{% url 'category_products' category.slug %}"
-    class="category-link"
->
-
-    {{ category.name }}
-
-</a>
+                            {{ category.name }}
 
                         </label>
 
@@ -144,7 +138,8 @@
 
                         <h3>
 
-{{ page_title }}
+                            All Products
+
                         </h3>
 
                         <small>

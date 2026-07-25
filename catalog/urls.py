@@ -12,5 +12,10 @@ urlpatterns=[
     views.product_detail,
     name='product_detail'
 ),
+path(
+    'category/<slug:slug>/',
+    views.category_products,
+    name='category_products'
+),
 
 ]

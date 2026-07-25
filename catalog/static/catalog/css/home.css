@@ -298,3 +298,60 @@
     color:#fff;
 
 }
+.search-box{
+
+    width:320px;
+
+}
+
+.search-form{
+
+    width:100%;
+
+}
+
+.input-group{
+
+    display:flex;
+
+}
+
+.search-input{
+
+    border-radius:50px 0 0 50px;
+
+    border-right:none;
+
+    height:46px;
+
+    box-shadow:none !important;
+
+}
+
+.search-input:focus{
+
+    border-color:#0d6efd;
+
+}
+
+.search-btn{
+
+    width:55px;
+
+    border:none;
+
+    background:#becce0;
+
+    color:#fff;
+
+    border-radius:0 50px 50px 0;
+
+    transition:.3s;
+
+}
+
+.search-btn:hover{
+
+    background:#a8bedf;
+
+}

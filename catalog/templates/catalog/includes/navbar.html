@@ -112,13 +112,34 @@
 
                 <div class="search-box">
 
-                    <i class="bi bi-search"></i>
+    <form method="GET"
+          action="{% url 'product_list' %}"
+          class="search-form">
 
-                    <input
-                        type="text"
-                        placeholder="Search Products">
+        <div class="input-group">
 
-                </div>
+            <input
+                type="text"
+                name="search"
+                class="form-control search-input"
+                placeholder="Search products..."
+                value="{{ request.GET.search }}"
+            >
+
+            <button
+                type="submit"
+                class="search-btn"
+            >
+
+                <i class="bi bi-search"></i>
+
+            </button>
+
+        </div>
+
+    </form>
+
+</div>
 
                 <a href="#" class="icon-btn">
 
