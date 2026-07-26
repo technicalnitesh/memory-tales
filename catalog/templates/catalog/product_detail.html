@@ -1,7 +1,9 @@
-{% extends 'catalog/base.html' %}
+{% extends "catalog/base.html" %}
 {% load static %}
 
-{% block title %}{{ product.name }}{% endblock %}
+{% block title %}
+{{ product.name }}
+{% endblock %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'catalog/css/product-detail.css' %}">
@@ -9,337 +11,37 @@
 
 {% block content %}
 
-<div class="container py-5">
+{% include "catalog/components/breadcrumb.html" %}
 
-    <!-- Breadcrumb -->
-    <nav class="mb-4">
-        <a href="/">Home</a>
-        <span class="mx-2">/</span>
-        <a href="#">{{ product.category.name }}</a>
-        <span class="mx-2">/</span>
-        <strong>{{ product.name }}</strong>
-    </nav>
+<section class="product-detail-section py-5">
 
-    <div class="row g-5">
+    <div class="container">
 
-        <!-- LEFT SIDE -->
-        <div class="col-lg-6">
+        <div class="row g-5">
 
-            <div class="main-image">
+            <!-- Gallery -->
 
-                {% if product.images.first %}
-                    <img id="mainProductImage"
-                         src="{{ product.images.first.image.url }}"
-                         alt="{{ product.name }}">
-                {% else %}
-                    <img id="mainProductImage"
-                         src="{{ product.thumbnail.url }}"
-                         alt="{{ product.name }}">
-                {% endif %}
+            <div class="col-lg-6">
+
+                {% include "catalog/components/product-gallery.html" %}
 
             </div>
-            
 
-            <div class="thumb-wrapper mt-4">
+            <!-- Product Info -->
 
-                {% for image in product.images.all %}
+            <div class="col-lg-6">
 
-                <div class="thumb">
-
-                    <img
-                        src="{{ image.image.url }}"
-                        onclick="changeImage(this)"
-                    >
-
-                </div>
-
-                {% endfor %}
+                {% include "catalog/components/product-info.html" %}
 
             </div>
 
         </div>
 
-        <!-- RIGHT SIDE -->
-
-        <div class="col-lg-6">
-
-            <div class="product-card">
-
-                <span class="badge bg-success mb-3">
-                    Best Seller
-                </span>
-
-                <h1 class="product-title">
-                    {{ product.name }}
-                </h1>
-
-                <div class="rating">
-
-                    ⭐⭐⭐⭐⭐
-
-                    <span>(126 Reviews)</span>
-
-                </div>
-
-                
-                
-
-                <p class="short-description">
-
-                    {{ product.short_description }}
-
-                </p>
-
-                <ul class="highlights">
-
-                    <li>✔ Premium HD Printing</li>
-
-                    <li>✔ Waterproof Finish</li>
-
-                    <li>✔ Fast Delivery</li>
-
-                    <li>✔ Secure Packaging</li>
-
-                </ul>
-
-                <hr>
-
-                <!-- Placeholder -->
-
-                <div class="options-placeholder">
-
-                    <h5>Customization Options</h5>
-
-                    <p>
-                        Product Options will appear here.
-                    </p>
-
-                </div>
-                     <div class="product-options">
-
-    <h4 class="mb-4">
-        Customize Your Product
-    </h4>
-
-    {% for option in product.options.all %}
-
-        <div class="option-group mb-4">
-
-            <label class="form-label fw-bold">
-
-                {{ option.option.name }}
-
-            </label>
-
-            <select
-                class="form-select product-option"
-            >
-
-                <option value="">
-
-                    Select {{ option.option.name }}
-
-                </option>
-
-                {% for value in option.values.all %}
-
-                <option
-                    value="{{ value.id }}"
-                    data-price="{{ value.price }}"
-                >
-
-                    {{ value.value }}
-
-                    {% if value.price > 0 %}
-
-                    (+₹{{ value.price }})
-
-                    {% endif %}
-
-                </option>
-
-                {% endfor %}
-
-            </select>
-
-        </div>
-
-    {% endfor %}
-
-</div>
-
-                <div class="qty-box">
-
-    <button id="minusBtn">−</button>
-
-    <input
-        id="qty"
-        value="1"
-        readonly
-    >
-
-    <button id="plusBtn">+</button>
-
-</div>
-<div class="upload-section">
-
-    <h4 class="mb-3">
-        Upload Your Photo
-    </h4>
-
-    <div class="upload-box" id="uploadBox">
-
-        <input
-            type="file"
-            id="photoInput"
-            accept="image/*"
-            hidden
-        >
-
-        <div class="upload-content">
-
-            <div class="upload-icon">
-
-                📷
-
-            </div>
-
-            <h5>
-
-                Drag & Drop Your Photo
-
-            </h5>
-
-            <p>
-
-                or Click to Browse
-
-            </p>
-
-            <small>
-
-                JPG, PNG, WEBP (Max 10MB)
-
-            </small>
-
-        </div>
-
     </div>
 
-</div>
+</section>
 
-<div
-    class="preview-section mt-4"
-    id="previewSection"
-    style="display:none;"
->
-
-    <h5>
-
-        Preview
-
-    </h5>
-
-    <img
-        id="previewImage"
-        class="preview-image"
-    >
-
-</div>
-<div class="price-card">
-
-    <div class="price-row">
-
-        <span>Base Price</span>
-
-        <strong>
-
-            ₹<span id="basePrice">
-
-                {{ product.base_price }}
-
-            </span>
-
-        </strong>
-
-    </div>
-
-    <div class="price-row">
-
-        <span>Customization</span>
-
-        <strong>
-
-            ₹<span id="optionPrice">
-
-                0.00
-
-            </span>
-
-        </strong>
-
-    </div>
-
-    <div class="price-row">
-
-        <span>Quantity</span>
-
-        <strong>
-
-            <span id="qtyText">
-
-                1
-
-            </span>
-
-        </strong>
-
-    </div>
-
-    <hr>
-
-    <div class="price-row total">
-
-        <span>Total Price</span>
-
-        <strong>
-
-            ₹<span id="productPrice">
-
-                {{ product.base_price }}
-
-            </span>
-
-        </strong>
-
-    </div>
-
-</div>
-                <div class="buy-buttons">
-
-                    <button class="btn-cart">
-
-                        🛒 Add To Cart
-
-                    </button>
-
-                    <button class="btn-buy">
-
-                        Buy Now
-
-                    </button>
-
-                </div>
-                
-
-            </div>
-     
-
-        </div>
-
-    </div>
-
-</div>
+{% include "catalog/components/related-products.html" %}
 
 {% endblock %}
 

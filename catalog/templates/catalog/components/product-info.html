@@ -1,0 +1,93 @@
+<div class="product-card">
+
+    {% if product.is_featured %}
+
+    <span class="badge bg-success mb-3">
+
+        Best Seller
+
+    </span>
+
+    {% endif %}
+
+    <h1 class="product-title">
+
+        {{ product.name }}
+
+    </h1>
+
+    <div class="rating">
+
+        ⭐⭐⭐⭐⭐
+
+        <span>
+
+            (126 Reviews)
+
+        </span>
+
+    </div>
+
+    <p class="short-description">
+
+        {{ product.short_description }}
+
+    </p>
+
+<div class="product-description">
+
+    {{ product.description|safe }}
+
+</div>
+
+    <hr>
+
+    {% include "catalog/components/product-options.html" %}
+
+    <div class="qty-box">
+
+        <button id="minusBtn">
+
+            −
+
+        </button>
+
+        <input
+            id="qty"
+            value="1"
+            readonly
+        >
+
+        <button id="plusBtn">
+
+            +
+
+        </button>
+
+    </div>
+
+    {% include "catalog/components/product-upload.html" %}
+
+    {% include "catalog/components/product-price.html" %}
+
+    <div class="buy-buttons">
+
+        <button
+            class="btn-cart"
+            id="addToCartBtn"
+            data-product="{{ product.id }}"
+        >
+
+            🛒 Add To Cart
+
+        </button>
+
+        <button class="btn-buy">
+
+            Buy Now
+
+        </button>
+
+    </div>
+
+</div>

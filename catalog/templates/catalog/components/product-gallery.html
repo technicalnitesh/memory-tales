@@ -1,0 +1,38 @@
+<div class="main-image">
+
+    {% if product.images.first %}
+
+        <img
+            id="mainProductImage"
+            src="{{ product.images.first.image.url }}"
+            alt="{{ product.name }}"
+        >
+
+    {% else %}
+
+        <img
+            id="mainProductImage"
+            src="{{ product.thumbnail.url }}"
+            alt="{{ product.name }}"
+        >
+
+    {% endif %}
+
+</div>
+
+<div class="thumb-wrapper mt-4">
+
+    {% for image in product.images.all %}
+
+    <div class="thumb">
+
+        <img
+            src="{{ image.image.url }}"
+            onclick="changeImage(this)"
+        >
+
+    </div>
+
+    {% endfor %}
+
+</div>

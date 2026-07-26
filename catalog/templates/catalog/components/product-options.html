@@ -1,0 +1,54 @@
+<div class="product-options">
+
+    <h4 class="mb-4">
+
+        Customize Your Product
+
+    </h4>
+
+    {% for option in product.options.all %}
+
+    <div class="option-group mb-4">
+
+        <label class="form-label fw-bold">
+
+            {{ option.option.name }}
+
+        </label>
+
+        <select
+            class="form-select product-option"
+        >
+
+            <option value="">
+
+                Select {{ option.option.name }}
+
+            </option>
+
+            {% for value in option.values.all %}
+
+            <option
+                value="{{ value.id }}"
+                data-price="{{ value.price }}"
+            >
+
+                {{ value.value }}
+
+                {% if value.price > 0 %}
+
+                    (+₹{{ value.price }})
+
+                {% endif %}
+
+            </option>
+
+            {% endfor %}
+
+        </select>
+
+    </div>
+
+    {% endfor %}
+
+</div>
