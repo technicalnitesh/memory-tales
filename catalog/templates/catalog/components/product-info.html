@@ -1,4 +1,14 @@
 <div class="product-card">
+    <form
+    id="cartForm"
+    enctype="multipart/form-data"
+>
+
+<input
+    type="hidden"
+    name="product_id"
+    value="{{ product.id }}"
+>
 
     {% if product.is_featured %}
 
@@ -91,3 +101,4 @@
     </div>
 
 </div>
+</form>

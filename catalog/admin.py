@@ -1,5 +1,4 @@
 from django.contrib import admin
-from .models import Wishlist
 from .models import (
     Category,
     Product,
@@ -7,8 +6,12 @@ from .models import (
     OptionMaster,
     ProductOption,
     ProductOptionValue,
+    Wishlist,
+    Cart,
+    CartItem,
+    CartItemOption,
+    CartItemImage,
 )
-admin.site.register(Wishlist)
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
 
@@ -154,5 +157,91 @@ class ProductOptionValueAdmin(admin.ModelAdmin):
         'product_option',
         'sort_order',
     )
+@admin.register(Wishlist)
+class WishlistAdmin(admin.ModelAdmin):
 
+    list_display = (
+        "id",
+        "user",
+        "session_key",
+        "product",
+        "created_at",
+    )
+
+    search_fields = (
+        "session_key",
+        "product__name",
+    )
+
+    list_filter = (
+        "created_at",
+    )
+class CartItemOptionInline(admin.TabularInline):
+
+    model = CartItemOption
+
+    extra = 0
+
+    readonly_fields = (
+        "product_option",
+        "product_option_value",
+        "extra_price",
+    )
+
+    can_delete = False
+class CartItemImageInline(admin.TabularInline):
+
+    model = CartItemImage
+
+    extra = 0
+
+    readonly_fields = (
+        "image",
+        "created_at",
+    )
+
+    can_delete = False
+@admin.register(CartItem)
+class CartItemAdmin(admin.ModelAdmin):
+
+    list_display = (
+        "id",
+        "cart",
+        "product",
+        "quantity",
+        "unit_price",
+        "total_price",
+    )
+
+    list_filter = (
+        "created_at",
+    )
+
+    search_fields = (
+        "product__name",
+        "item_key",
+    )
+
+    inlines = [
+        CartItemOptionInline,
+        CartItemImageInline,
+    ]
+@admin.register(Cart)
+class CartAdmin(admin.ModelAdmin):
+
+    list_display = (
+        "id",
+        "user",
+        "session_key",
+        "created_at",
+        "updated_at",
+    )
+
+    search_fields = (
+        "session_key",
+    )
+
+    list_filter = (
+        "created_at",
+    )
     

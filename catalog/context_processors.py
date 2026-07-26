@@ -1,4 +1,5 @@
 from .models import Wishlist, Category
+from .models import Cart, CartItem
 
 
 def global_data(request):
@@ -39,4 +40,25 @@ def global_data(request):
 
         "navbar_categories": categories,
 
+    }
+def cart_data(request):
+
+    count = 0
+
+    session_key = request.session.session_key
+
+    if not session_key:
+        request.session.create()
+        session_key = request.session.session_key
+
+    cart = Cart.objects.filter(
+        session_key=session_key
+    ).first()
+
+    if cart:
+
+        count = cart.items.count()
+
+    return {
+        "cart_count": count
     }

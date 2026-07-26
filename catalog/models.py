@@ -171,3 +171,113 @@ class Wishlist(models.Model):
     created_at = models.DateTimeField(
         auto_now_add=True
     )
+class Cart(models.Model):
+
+    user = models.ForeignKey(
+        User,
+        null=True,
+        blank=True,
+        on_delete=models.CASCADE
+    )
+
+    session_key = models.CharField(
+        max_length=100,
+        blank=True
+    )
+
+    created_at = models.DateTimeField(
+        auto_now_add=True
+    )
+
+    updated_at = models.DateTimeField(
+        auto_now=True
+    )
+
+    def __str__(self):
+
+        return self.session_key or f"Cart {self.id}"
+class CartItem(models.Model):
+
+    cart = models.ForeignKey(
+        Cart,
+        on_delete=models.CASCADE,
+        related_name="items"
+    )
+
+    product = models.ForeignKey(
+        Product,
+        on_delete=models.CASCADE
+    )
+
+    quantity = models.PositiveIntegerField(
+        default=1
+    )
+
+    unit_price = models.DecimalField(
+        max_digits=10,
+        decimal_places=2
+    )
+
+    total_price = models.DecimalField(
+        max_digits=10,
+        decimal_places=2
+    )
+    item_key = models.CharField(
+    max_length=128,
+    unique=True,
+    db_index=True
+    )
+
+    created_at = models.DateTimeField(
+        auto_now_add=True
+    )
+
+    updated_at = models.DateTimeField(
+        auto_now=True
+    )
+
+    def __str__(self):
+
+        return self.product.name
+class CartItemOption(models.Model):
+
+    cart_item = models.ForeignKey(
+        CartItem,
+        on_delete=models.CASCADE,
+        related_name="options"
+    )
+
+    product_option = models.ForeignKey(
+        ProductOption,
+        on_delete=models.CASCADE
+    )
+
+    product_option_value = models.ForeignKey(
+        ProductOptionValue,
+        on_delete=models.CASCADE
+    )
+
+    extra_price = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        default=0
+    )
+
+    def __str__(self):
+
+        return f"{self.product_option.option.name}"
+class CartItemImage(models.Model):
+
+    cart_item = models.ForeignKey(
+        CartItem,
+        on_delete=models.CASCADE,
+        related_name="images"
+    )
+
+    image = models.ImageField(
+        upload_to="cart/"
+    )
+
+    created_at = models.DateTimeField(
+        auto_now_add=True
+    )

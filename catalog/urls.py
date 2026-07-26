@@ -27,5 +27,10 @@ path(
     views.wishlist,
     name="wishlist"
 ),
+path(
+    "cart/add/",
+    views.add_to_cart,
+    name="add_to_cart",
+),
 
 ]
