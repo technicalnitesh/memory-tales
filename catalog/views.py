@@ -401,3 +401,5 @@ def wishlist(request):
         context
 
     )
+def add_to_cart(request):
+    return HttpResponse("Add to Cart")
