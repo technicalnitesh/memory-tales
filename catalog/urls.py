@@ -17,5 +17,15 @@ path(
     views.category_products,
     name='category_products'
 ),
+path(
+    "wishlist/toggle/",
+    views.toggle_wishlist,
+    name="toggle_wishlist"
+),
+path(
+    "wishlist/",
+    views.wishlist,
+    name="wishlist"
+),
 
 ]

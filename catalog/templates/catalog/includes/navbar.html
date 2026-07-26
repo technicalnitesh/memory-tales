@@ -139,11 +139,19 @@
 
 </div>
 
-                <a href="#" class="icon-btn">
+             <a href="{% url 'wishlist' %}" class="icon-btn position-relative">
 
-                    <i class="bi bi-heart"></i>
+    <i class="bi bi-heart fs-5"></i>
 
-                </a>
+    <span
+        id="wishlistCount"
+        class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+    >
+{{ wishlist_count }}
+
+</span>
+
+</a>
 
                 <a href="#" class="icon-btn position-relative">
 

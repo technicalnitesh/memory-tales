@@ -223,3 +223,68 @@
     color:#0d6efd !important;
 
 }
+.wishlist-btn{
+
+    position:absolute;
+
+    top:15px;
+
+    right:15px;
+
+    width:42px;
+
+    height:42px;
+
+    border-radius:50%;
+
+    background:#fff;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    cursor:pointer;
+
+    transition:var(--transition);
+
+    box-shadow:var(--shadow);
+
+    z-index:10;
+
+}
+
+.wishlist-btn i{
+
+    font-size:18px;
+
+    color:var(--text-dark);
+
+    transition:var(--transition);
+
+}
+
+.wishlist-btn:hover{
+
+    background:var(--primary-color);
+
+}
+
+.wishlist-btn:hover i{
+
+    color:#f00b0b;
+
+}
+
+.wishlist-btn.active{
+
+    background:var(--primary-color);
+
+}
+
+.wishlist-btn.active i{
+
+    color:#db0707;
+
+}

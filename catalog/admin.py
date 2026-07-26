@@ -1,5 +1,5 @@
 from django.contrib import admin
-
+from .models import Wishlist
 from .models import (
     Category,
     Product,
@@ -8,6 +8,7 @@ from .models import (
     ProductOption,
     ProductOptionValue,
 )
+admin.site.register(Wishlist)
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
 
@@ -153,3 +154,5 @@ class ProductOptionValueAdmin(admin.ModelAdmin):
         'product_option',
         'sort_order',
     )
+
+    

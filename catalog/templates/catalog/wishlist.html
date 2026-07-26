@@ -1,0 +1,74 @@
+{% extends "catalog/base.html" %}
+
+{% load static %}
+
+{% block title %}
+My Wishlist
+{% endblock %}
+
+{% block content %}
+
+<section class="py-5">
+
+    <div class="container">
+        {% include "catalog/components/breadcrumb.html" %}
+
+      
+
+        {% if wishlist %}
+
+        <div class="row" id="wishlistContainer">
+            
+
+            {% for item in wishlist %}
+
+            <div class="col-lg-3 col-md-6 mb-4 wishlist-item">
+
+                {% with product=item.product %}
+
+                    {% include "catalog/components/product-card.html" %}
+
+                {% endwith %}
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        {% else %}
+
+        <div class="text-center py-5">
+
+            <i class="bi bi-heart display-1 text-muted"></i>
+
+            <h3 class="mt-4">
+
+                Your Wishlist is Empty
+
+            </h3>
+
+            <p class="text-muted">
+
+                Save your favorite products here.
+
+            </p>
+
+            <a
+                href="{% url 'product_list' %}"
+                class="btn btn-primary mt-3"
+            >
+
+                Browse Products
+
+            </a>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</section>
+
+{% endblock %}

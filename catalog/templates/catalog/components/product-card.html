@@ -1,59 +1,56 @@
 <div class="product-card">
 
-    <div class="product-image">
+                    <div class="product-image">
 
-        <img
-            src="{{ product.thumbnail.url }}"
-            alt="{{ product.name }}"
-        >
+                        {% with primary=product.images.all|first %}
 
-        {% if product.is_featured %}
+                            {% if primary %}
+                                <img src="{{ primary.image.url }}" alt="{{ product.name }}">
+                            {% else %}
+                                <img src="https://via.placeholder.com/500x500?text=No+Image" alt="">
+                            {% endif %}
 
-            <span class="badge-featured">
+                        {% endwith %}
 
-                BEST SELLER
+                        <span class="product-badge">Best Seller</span>
 
-            </span>
+                           <!-- Wishlist -->
 
-        {% endif %}
+        <div
+class="wishlist-btn wishlist-toggle {% if product.id in wishlist_products %}active{% endif %}"
+data-product="{{ product.id }}"
+>
 
-    </div>
-
-    <div class="product-body">
-
-        <small>
-
-            {{ product.category.name }}
-
-        </small>
-
-        <h5>
-
-            {{ product.name }}
-
-        </h5>
-
-        <p>
-
-            {{ product.short_description|truncatechars:60 }}
-
-        </p>
-
-        <div class="product-price">
-
-            ₹{{ product.base_price }}
-
+<i class="bi {% if product.id in wishlist_products %}bi-heart-fill{% else %}bi-heart{% endif %}"></i>
         </div>
 
-        <a
-            href="{% url 'product_detail' product.slug %}"
-            class="btn btn-primary w-100 mt-3"
-        >
+                    </div>
 
-            View Details
+                    <div class="product-content">
 
-        </a>
+                        <small>{{ product.category.name }}</small>
 
-    </div>
+                        <h5>{{ product.name }}</h5>
 
-</div>
+                        <div class="rating">
+
+                            ★★★★★
+
+                        </div>
+
+                        <div class="price">
+
+                            ₹ {{ product.base_price }}
+
+                        </div>
+
+                        <a href="{% url 'product_detail' product.slug %}" class="customize-btn">
+                            
+
+                            Customize Now
+
+                        </a>
+
+                    </div>
+
+                </div>

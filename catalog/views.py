@@ -5,6 +5,7 @@ from django.template.loader import render_to_string
 from django.http import JsonResponse
 from django.core.paginator import Paginator
 from django.db.models import Count
+from .models import Wishlist
 def home(request):
 
     categories = Category.objects.filter(status=True)
@@ -16,6 +17,7 @@ def home(request):
         .prefetch_related('images')
         [:8]
     )
+
 
     context = {
         "categories": categories,
@@ -296,6 +298,105 @@ def category_products(request, slug):
         request,
 
         "catalog/product_list.html",
+
+        context
+
+    )
+def toggle_wishlist(request):
+
+    if request.method != "POST":
+
+        return JsonResponse({
+
+            "success": False
+
+        })
+
+    product_id = request.POST.get("product_id")
+
+    if not request.session.session_key:
+
+        request.session.create()
+
+    session_key = request.session.session_key
+
+    wishlist = Wishlist.objects.filter(
+
+        session_key=session_key,
+
+        product_id=product_id
+
+    ).first()
+
+    if wishlist:
+
+        wishlist.delete()
+
+        added = False
+
+    else:
+
+        Wishlist.objects.create(
+
+            session_key=session_key,
+
+            product_id=product_id
+
+        )
+
+        added = True
+
+    count = Wishlist.objects.filter(
+
+        session_key=session_key
+
+    ).count()
+
+    return JsonResponse({
+
+        "success": True,
+
+        "added": added,
+
+        "count": count
+
+    })
+def wishlist(request):
+
+    if not request.session.session_key:
+
+        request.session.create()
+
+    wishlist = Wishlist.objects.filter(
+
+        session_key=request.session.session_key
+
+    ).select_related(
+
+        "product"
+
+    ).prefetch_related(
+
+        "product__images"
+
+    )
+
+    context = {
+
+    "wishlist": wishlist,
+
+    "page_title": "My Wishlist",
+
+    "page_description":
+        "Save your favourite products and purchase them anytime.",
+
+    }
+
+    return render(
+
+        request,
+
+        "catalog/wishlist.html",
 
         context
 
