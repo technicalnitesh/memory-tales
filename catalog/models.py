@@ -196,6 +196,9 @@ class Cart(models.Model):
     def __str__(self):
 
         return self.session_key or f"Cart {self.id}"
+    class Meta:
+
+        ordering = ["-updated_at"]
 class CartItem(models.Model):
 
     cart = models.ForeignKey(
@@ -224,7 +227,6 @@ class CartItem(models.Model):
     )
     item_key = models.CharField(
     max_length=128,
-    unique=True,
     db_index=True
     )
 
@@ -239,6 +241,24 @@ class CartItem(models.Model):
     def __str__(self):
 
         return self.product.name
+    class Meta:
+
+        ordering = ["id"]
+
+        constraints = [
+
+            models.UniqueConstraint(
+
+                fields=[
+                    "cart",
+                    "item_key"
+                ],
+
+                name="unique_cart_item"
+
+            )
+
+        ]
 class CartItemOption(models.Model):
 
     cart_item = models.ForeignKey(
@@ -278,6 +298,12 @@ class CartItemImage(models.Model):
         upload_to="cart/"
     )
 
+    alt_text = models.CharField(
+    max_length=200,
+    blank=True
+    )
+    
     created_at = models.DateTimeField(
         auto_now_add=True
     )
+    

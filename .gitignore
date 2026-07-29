@@ -11,8 +11,8 @@ __pycache__/
 # Environment
 .env
 
-# Media Upload
-media/
+# Media Upload for only testing 
+#media/
 
 # OS Files
 Thumbs.db
