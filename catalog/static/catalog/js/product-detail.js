@@ -8,6 +8,24 @@ document.addEventListener("DOMContentLoaded", function () {
     const minusBtn = document.getElementById("minusBtn");
     const selects = document.querySelectorAll(".product-option");
 
+    const cartForm = document.getElementById("cartForm");
+    const addToCartBtn = document.getElementById("addToCartBtn");
+
+
+    if(addToCartBtn){
+
+       addToCartBtn.addEventListener("click", function (e) {
+
+    console.log("Button Clicked");
+
+    e.preventDefault();
+
+    addToCart();
+
+});
+
+        }
+
     if (!priceElement) return;
 
     let basePrice = parseFloat(priceElement.textContent.trim());
@@ -141,3 +159,89 @@ photoInput.addEventListener("change",function(e){
 
 });
 
+
+$(document).on("click", "#addToCartBtn", function (e) {
+
+    // alert("caa");
+
+    e.preventDefault();
+
+    let form = $("#cartForm")[0];
+
+    let formData = new FormData(form);
+
+    $.ajax({
+
+        url: "/cart/add/",
+
+        type: "POST",
+
+        data: formData,
+
+        processData: false,
+
+        contentType: false,
+
+        headers: {
+
+            "X-CSRFToken": $("[name=csrfmiddlewaretoken]").val()
+
+        },
+
+        beforeSend: function () {
+
+            $("#addToCartBtn")
+                .prop("disabled", true)
+                .html('<i class="fa fa-spinner fa-spin"></i> Adding...');
+
+        },
+
+        success: function (response) {
+
+            console.log(response);
+
+            $("#addToCartBtn")
+                .prop("disabled", false)
+                .html("🛒 Add To Cart");
+
+            if (response.success) {
+
+                $("#cartCount").text(response.count);
+
+                showAlert(
+                    "success",
+                    "Added",
+                    response.message
+                );
+
+            } else {
+
+                showAlert(
+                    "error",
+                    "Error",
+                    response.message
+                );
+
+            }
+
+        },
+
+        error: function (xhr) {
+
+            $("#addToCartBtn")
+                .prop("disabled", false)
+                .html("🛒 Add To Cart");
+
+            console.log(xhr.responseText);
+
+            showAlert(
+                "error",
+                "Error",
+                "Something went wrong."
+            );
+
+        }
+
+    });
+
+});
