@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from django.db.models import Sum
 
 urlpatterns=[
 
@@ -32,5 +33,32 @@ urlpatterns=[
         views.add_to_cart,
         name="add_to_cart",
     ),
+    path(
+    "cart/",
+    views.cart,
+    name="cart",
+    ),
+    path(
+    "cart/update/",
+    views.update_cart_quantity,
+    name="update_cart_quantity",
+    ),
+    path(
+    "cart/remove/",
+    views.remove_cart_item,
+    name="remove_cart_item",
+    ),
 
 ]
+
+def get_cart_count(request):
+
+    cart = get_or_create_cart(request)
+
+    total = cart.items.aggregate(
+
+        total=Sum("quantity")
+
+    )["total"]
+
+    return total or 0

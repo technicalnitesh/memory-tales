@@ -10,6 +10,8 @@
     value="{{ product.id }}"
 >
 
+{% csrf_token %}
+
     {% if product.is_featured %}
 
     <span class="badge bg-success mb-3">
@@ -56,19 +58,21 @@
 
     <div class="qty-box">
 
-        <button id="minusBtn">
+        <button type="button" id="minusBtn">
 
             −
 
         </button>
 
-        <input
-            id="qty"
-            value="1"
-            readonly
-        >
-
-        <button id="plusBtn">
+       <input
+    type="number"
+    id="qty"
+    name="quantity"
+    value="1"
+    min="1"
+    readonly
+>
+        <button type="button" id="plusBtn">
 
             +
 
@@ -82,16 +86,12 @@
 
     <div class="buy-buttons">
 
-        <button
-            class="btn-cart"
-            id="addToCartBtn"
-            data-product="{{ product.id }}"
-        >
-
-            🛒 Add To Cart
-
-        </button>
-
+      <button
+    type="button"
+    class="btn-cart"
+    id="addToCartBtn">
+    🛒 Add To Cart
+</button>
         <button class="btn-buy">
 
             Buy Now

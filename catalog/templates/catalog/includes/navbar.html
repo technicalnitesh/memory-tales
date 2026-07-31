@@ -112,7 +112,8 @@
 
                 <div class="search-box">
 
-    <form  id="searchForm">
+    <form  id="searchForm" action="{% url 'product_list' %}"
+    method="GET">
 
         <div class="input-group">
 
@@ -153,7 +154,7 @@
 
 </a>
 
-                <a href="#" class="icon-btn position-relative">
+                <a href="{% url 'cart' %}" class="icon-btn position-relative">
 
                     <i class="bi bi-cart3"></i>
 

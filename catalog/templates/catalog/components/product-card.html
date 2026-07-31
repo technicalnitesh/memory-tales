@@ -1,56 +1,88 @@
+
 <div class="product-card">
 
-                    <div class="product-image">
+    <div class="product-image">
 
-                        {% with primary=product.images.all|first %}
+        {% with primary=product.images.all|first %}
 
-                            {% if primary %}
-                                <img src="{{ primary.image.url }}" alt="{{ product.name }}">
-                            {% else %}
-                                <img src="https://via.placeholder.com/500x500?text=No+Image" alt="">
-                            {% endif %}
+            {% if primary %}
 
-                        {% endwith %}
+                <img
+                    src="{{ primary.image.url }}"
+                    alt="{{ product.name }}"
+                    class="product-img"
+                >
 
-                        <span class="product-badge">Best Seller</span>
+            {% else %}
 
-                           <!-- Wishlist -->
+                <div class="product-placeholder">
 
-        <div
-class="wishlist-btn wishlist-toggle {% if product.id in wishlist_products %}active{% endif %}"
-data-product="{{ product.id }}"
->
-
-<i class="bi {% if product.id in wishlist_products %}bi-heart-fill{% else %}bi-heart{% endif %}"></i>
-        </div>
-
-                    </div>
-
-                    <div class="product-content">
-
-                        <small>{{ product.category.name }}</small>
-
-                        <h5>{{ product.name }}</h5>
-
-                        <div class="rating">
-
-                            ★★★★★
-
-                        </div>
-
-                        <div class="price">
-
-                            ₹ {{ product.base_price }}
-
-                        </div>
-
-                        <a href="{% url 'product_detail' product.slug %}" class="customize-btn">
-                            
-
-                            Customize Now
-
-                        </a>
-
-                    </div>
+                    <i class="bi bi-image"></i>
 
                 </div>
+
+            {% endif %}
+
+        {% endwith %}
+
+       {% if product.is_featured %}
+
+    <span class="product-badge">
+
+        Best Seller
+
+    </span>
+
+    {% endif %}
+
+        <!-- Wishlist -->
+
+        <div
+            class="wishlist-btn wishlist-toggle {% if product.id in wishlist_products %}active{% endif %}"
+            data-product="{{ product.id }}"
+        >
+
+            <i class="bi {% if product.id in wishlist_products %}bi-heart-fill{% else %}bi-heart{% endif %}"></i>
+
+        </div>
+
+    </div>
+
+    <div class="product-content">
+
+        <small>
+
+            {{ product.category.name }}
+
+        </small>
+
+        <h5>
+
+            {{ product.name }}
+
+        </h5>
+
+        <div class="rating">
+
+            ★★★★★
+
+        </div>
+
+        <div class="price">
+
+            ₹ {{ product.base_price }}
+
+        </div>
+
+        <a
+            href="{% url 'product_detail' product.slug %}"
+            class="customize-btn"
+        >
+
+            Customize Now
+
+        </a>
+
+    </div>
+
+</div>
